@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="sky">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>enzo | أناقة هادئة</title>
+<meta name="description" content="متجر enzo للأزياء: ملابس رجالية ونسائية وإكسسوارات، بدل، خصومات الموسم والبحث باسم الماركة.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ================= enzo ================= */
+:root{
+  --bg:#F7FBFF; --surface:#fff; --mist:#EAF3FA; --sky:#CFE5F5;
+  --accent:#6FA6D2; --ink:#1B2F4A; --muted:#5F7690; --line:#D8E5F0;
+  --coral:#E7897F; --deep:#1F3A5A; --on-deep:#fff; --shade:21,48,80;
+  --ease:cubic-bezier(.22,.7,.2,1);
+  --pad:clamp(1.1rem,5vw,4rem);
+  --gi:0;
+}
+html[data-theme="mono"]{
+  --bg:#fff; --surface:#fff; --mist:#F4F4F4; --sky:#E6E6E6;
+  --accent:#111; --ink:#111; --muted:#777; --line:#E5E5E5;
+  --coral:#111; --deep:#111; --shade:0,0,0;
+}
+body[data-gender="women"]{--gi:1}
+body[data-gender="acc"]{--gi:2}
+
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:'Tajawal',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased;transition:background .5s,color .5s}
+body.locked{overflow:hidden}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:'El Messiri','Tajawal',serif;line-height:1.25;font-weight:600}
+h2{font-size:clamp(1.7rem,3.6vw,2.7rem)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+[hidden]{display:none!important}
+.sec{padding:clamp(3rem,7vw,5.5rem) var(--pad)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:2rem}
+.sec-head p{color:var(--muted);max-width:46ch}
+
+/* ---------- الهيدر ---------- */
+.site-header{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;gap:1.2rem;padding:.75rem clamp(1rem,4vw,3rem);color:#fff;transition:background .4s,color .4s,box-shadow .4s}
+.site-header.solid{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:var(--ink);box-shadow:0 1px 0 var(--line)}
+.logo{font-family:'El Messiri',serif;font-size:2rem;font-weight:700;direction:ltr;letter-spacing:-.01em}
+.nav{display:flex;gap:1.6rem;margin-inline-end:auto}
+.nav a{position:relative;padding:.1rem 0}
+.nav a::after{content:'';position:absolute;inset:auto 0 -3px 0;height:2px;background:currentColor;transform:scaleX(0);transition:transform .35s var(--ease)}
+.nav a:hover::after{transform:scaleX(1)}
+.search{position:relative;width:min(300px,34vw)}
+.search svg{position:absolute;inset-inline-start:.95rem;top:50%;transform:translateY(-50%);pointer-events:none}
+.search input{width:100%;padding:.6rem 1rem;padding-inline-start:2.7rem;border-radius:999px;border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.2);color:inherit;font:inherit;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .3s,border-color .3s}
+.search input::placeholder{color:inherit;opacity:.85}
+.solid .search input{background:var(--mist);border-color:var(--line)}
+.suggest{position:absolute;inset:calc(100% + 8px) 0 auto 0;background:var(--surface);color:var(--ink);border-radius:18px;box-shadow:0 18px 50px rgba(var(--shade),.2);padding:.4rem;display:grid;gap:2px;animation:pop .25s var(--ease)}
+.suggest button{display:flex;justify-content:space-between;gap:1rem;padding:.6rem .8rem;border-radius:12px;text-align:start}
+.suggest button:hover,.suggest button:focus-visible{background:var(--mist)}
+.suggest small{color:var(--muted)}
+.suggest p{padding:.7rem .8rem;color:var(--muted)}
+.icons{display:flex;gap:.1rem}
+.icon-btn{position:relative;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;transition:background .3s}
+.icon-btn:hover{background:rgba(255,255,255,.22)}
+.solid .icon-btn:hover,.drawer .icon-btn:hover{background:var(--mist)}
+.count{position:absolute;top:1px;inset-inline-end:1px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:var(--coral);color:#fff;font-size:.72rem;line-height:18px;text-align:center}
+.count:empty,.count[data-n="0"]{display:none}
+
+/* ---------- الواجهة ---------- */
+.hero{position:relative;min-height:max(660px,100svh);display:grid;align-items:end;overflow:hidden;color:#fff;background:linear-gradient(160deg,#BFDDF3,#7FA9CC)}
+html[data-theme="mono"] .hero{background:#222}
+.hero-photo,.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-video{opacity:0;transition:opacity 1.4s;object-fit:contain;object-position:center bottom}
+.hero-video.on{opacity:1}
+/* نسخة مغبّشة تملأ الجوانب، والفيديو الأصلي يظهر كامل فوقها */
+.hero-video.back{object-fit:cover;object-position:center;filter:blur(30px) saturate(1.1);transform:scale(1.2)}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(var(--shade),.38),rgba(var(--shade),.08) 40%,rgba(var(--shade),.62))}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto;align-items:end;gap:2rem;padding:7rem var(--pad) 4.5rem}
+.hero-text{display:grid;justify-items:start;gap:1.1rem}
+.kicker{padding:.35rem 1.1rem;border-radius:999px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:rise 1s .1s var(--ease) both}
+.wordmark{direction:ltr;display:flex;font-size:clamp(6rem,19vw,15rem);font-weight:700;letter-spacing:-.04em;line-height:.85;text-shadow:0 14px 50px rgba(var(--shade),.35)}
+.wordmark span{display:inline-block;animation:rise 1.3s var(--ease) both}
+.wordmark span:nth-child(2){animation-delay:.12s}.wordmark span:nth-child(3){animation-delay:.24s}.wordmark span:nth-child(4){animation-delay:.36s}
+.hero-sub{font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:300;max-width:34ch;transition:opacity .35s;animation:rise 1s .6s var(--ease) both}
+.hero-sub.swap{opacity:0}
+.hero .seg{animation:rise 1s .75s var(--ease) both}
+.hero .cta{animation:rise 1s .9s var(--ease) both}
+
+.deal-card{display:grid;grid-template-columns:96px 1fr;gap:1rem;align-items:center;width:min(340px,86vw);padding:.8rem;border-radius:26px 26px 26px 26px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.5);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);text-align:start;color:#fff;animation:rise 1.2s 1s var(--ease) both;transition:transform .45s var(--ease),background .3s}
+.deal-card:hover{transform:translateY(-6px);background:rgba(255,255,255,.3)}
+.deal-card img{width:96px;height:120px;object-fit:cover;border-radius:48px 48px 12px 12px;background:var(--sky)}
+.deal-card small{display:block;opacity:.9}
+.deal-card b{font:600 1.15rem 'El Messiri',serif;display:block;line-height:1.3}
+.deal-card .dc-price{margin-top:.2rem;display:flex;gap:.6rem;align-items:baseline}
+.deal-card s{opacity:.75;font-size:.9rem}
+.deal-card .dc-tag{display:inline-block;padding:0 .6rem;border-radius:6px;background:var(--coral);font-size:.8rem;font-weight:700}
+.scroll-hint{position:absolute;z-index:2;bottom:1.2rem;inset-inline:0;margin-inline:auto;width:26px;height:42px;border:2px solid rgba(255,255,255,.7);border-radius:14px}
+.scroll-hint span{position:absolute;top:8px;left:50%;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:#fff;animation:wheel 2.2s ease-in-out infinite}
+
+/* ---------- أزرار ---------- */
+.cta{display:inline-flex;align-items:center;justify-content:center;padding:.85rem 2.2rem;border-radius:999px;background:#fff;color:var(--deep);font-weight:700;box-shadow:0 10px 30px rgba(var(--shade),.18);transition:transform .35s var(--ease),box-shadow .35s}
+.cta:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(var(--shade),.25)}
+.cta.dark{background:var(--deep);color:var(--on-deep)}
+.cta.full{width:100%}
+.cta.ghost{background:transparent;color:inherit;border:1px solid currentColor;box-shadow:none}
+
+.seg{position:relative;display:inline-grid;grid-template-columns:repeat(3,1fr);padding:5px;border-radius:999px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.seg button{position:relative;z-index:1;padding:.62rem 1.7rem;border-radius:999px;color:#fff;font-weight:500;transition:color .4s;white-space:nowrap}
+.seg .thumb{position:absolute;top:5px;bottom:5px;right:5px;width:calc((100% - 10px) / 3);border-radius:999px;background:#fff;transition:transform .55s var(--ease);transform:translateX(calc(var(--gi) * -100%))}
+body[data-gender="men"] .seg button[data-g="men"],
+body[data-gender="women"] .seg button[data-g="women"],
+body[data-gender="acc"] .seg button[data-g="acc"]{color:var(--deep)}
+.seg.on-light{background:var(--sky);border-color:transparent;backdrop-filter:none}
+.seg.on-light button{color:var(--ink)}
+.seg.on-light .thumb{background:var(--deep)}
+body[data-gender="men"] .seg.on-light button[data-g="men"],
+body[data-gender="women"] .seg.on-light button[data-g="women"],
+body[data-gender="acc"] .seg.on-light button[data-g="acc"]{color:var(--on-deep)}
+
+/* ---------- شريط متحرك ---------- */
+.marquee{overflow:hidden;border-block:1px solid var(--line);padding:.9rem 0;white-space:nowrap;background:var(--surface)}
+.marquee-track{display:inline-flex;gap:2.6rem;direction:ltr;animation:marquee 38s linear infinite}
+.marquee span{font:600 1.05rem 'El Messiri',serif;color:var(--muted)}
+.marquee span.sale{color:var(--coral)}
+
+/* ---------- التشكيلات (أقواس) ---------- */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,3vw,2.2rem)}
+.tile{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;border-radius:999px 999px 22px 22px;background:var(--sky)}
+.tile img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.tile::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(var(--shade),.6))}
+.tile:hover img{transform:scale(1.06)}
+.tile-info{position:absolute;z-index:1;inset:auto 0 1.6rem 0;text-align:center;color:#fff}
+.tile-info h3{font-size:clamp(1.5rem,3vw,2.2rem)}
+.tile-info span{opacity:.9}
+
+/* ---------- الماركات ---------- */
+.brands{text-align:center;background:var(--surface)}
+.brand-list{margin-top:1.6rem;display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 2.4rem}
+.brand-list button{position:relative;font-family:'El Messiri',serif;font-size:clamp(1.4rem,3vw,2.1rem);color:var(--muted);padding:.2rem 0;direction:ltr;transition:color .35s}
+.brand-list button sup{font:400 .75rem 'Tajawal';margin-inline-start:.3rem;color:var(--accent)}
+.brand-list button::after{content:'';position:absolute;inset:auto 0 0 0;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.brand-list button:hover{color:var(--ink)}
+.brand-list button:hover::after{transform:scaleX(1)}
+
+/* ---------- الخصومات ---------- */
+.deals{background:var(--mist);padding-inline:0}
+.deals .sec-head{padding-inline:var(--pad)}
+.countdown{display:flex;gap:.7rem;direction:ltr}
+.countdown div{display:grid;justify-items:center;min-width:68px;padding:.5rem .6rem;border-radius:16px;background:var(--surface);box-shadow:0 6px 20px rgba(var(--shade),.07)}
+.countdown b{font:600 1.7rem 'El Messiri',serif;line-height:1.2}
+.countdown span{font-size:.78rem;color:var(--muted)}
+.deals-row{display:flex;gap:1.4rem;padding:.5rem var(--pad) 1.2rem;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin}
+.deals-row .card{flex:0 0 clamp(210px,24vw,270px);scroll-snap-align:start}
+
+/* ---------- المتجر ---------- */
+.shop{background:var(--bg)}
+.toolbar{display:grid;gap:1rem;padding-bottom:1.1rem;border-bottom:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem 1rem}
+.row>.lbl{color:var(--muted);min-width:2.8rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chips button{padding:.42rem 1.1rem;border-radius:999px;background:var(--mist);color:var(--muted);transition:background .3s,color .3s}
+.chips button:hover{background:var(--sky);color:var(--ink)}
+.chips button[aria-pressed="true"]{background:var(--deep);color:var(--on-deep)}
+#colorFilter{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+#colorFilter .all{padding:.3rem .95rem;border-radius:999px;background:var(--mist);color:var(--muted)}
+#colorFilter .all[aria-pressed="true"]{background:var(--deep);color:var(--on-deep)}
+.tools{display:flex;flex-wrap:wrap;gap:1.1rem;align-items:center;margin-inline-start:auto}
+.switch{display:flex;align-items:center;gap:.6rem;cursor:pointer;user-select:none}
+.switch input{position:absolute;opacity:0}
+.switch .track{position:relative;width:42px;height:24px;border-radius:12px;background:var(--sky);transition:background .3s}
+.switch .track::after{content:'';position:absolute;top:3px;inset-inline-start:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(var(--shade),.25);transition:transform .35s var(--ease)}
+.switch input:checked+.track{background:var(--coral)}
+.switch input:checked+.track::after{transform:translateX(-18px)}
+.switch input:focus-visible+.track{outline:3px solid var(--accent);outline-offset:3px}
+select{font:inherit;color:var(--ink);padding:.5rem 1rem;border-radius:12px;border:1px solid var(--line);background:var(--surface)}
+.result-info{margin:1rem 0 1.6rem;color:var(--muted);min-height:1.7em}
+.link{color:var(--accent);text-decoration:underline;text-underline-offset:4px;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:2.2rem 1.5rem}
+.grid.swap .card{animation:fade .6s var(--ease) both;animation-delay:calc(var(--i,0) * 45ms)}
+.empty-state{grid-column:1/-1;text-align:center;padding:3.5rem 1rem;color:var(--muted);display:grid;gap:1rem;justify-items:center}
+
+/* ---------- البطاقة ---------- */
+.card{cursor:pointer}
+.card-media{position:relative;aspect-ratio:4/5;border-radius:50% 50% 18px 18px / 26% 26% 18px 18px;overflow:hidden;background:var(--sky)}
+.card-media img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.card:hover .card-media img{transform:scale(1.06)}
+.badge{position:absolute;top:2.2rem;inset-inline-start:.7rem;padding:.1rem .7rem;border-radius:6px;background:var(--coral);color:#fff;font-size:.85rem;font-weight:700}
+.heart{position:absolute;top:2.1rem;inset-inline-end:.7rem;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:var(--muted);transition:transform .3s var(--ease),color .3s}
+.heart:hover{transform:scale(1.1)}
+.heart.on{color:var(--coral)}
+.heart.on svg{fill:currentColor}
+.quick{position:absolute;inset:auto .8rem .8rem;padding:.6rem;border-radius:999px;background:rgba(255,255,255,.95);color:var(--deep);font-weight:500;transform:translateY(140%);transition:transform .45s var(--ease)}
+.card:hover .quick,.card:focus-within .quick{transform:none}
+.card-body{padding:.9rem .3rem 0;display:grid;gap:.1rem}
+.brand{font:600 .85rem 'El Messiri',serif;color:var(--accent);direction:ltr;text-align:start}
+html[data-theme="mono"] .brand{color:var(--muted)}
+.card-body h3{font:500 1.05rem 'Tajawal',sans-serif}
+.meta{color:var(--muted);font-size:.88rem}
+.swatches{display:flex;gap:.45rem;margin:.3rem 0 .15rem}
+.sw{width:18px;height:18px;padding:0;border-radius:50%;background:var(--c);border:1px solid rgba(var(--shade),.25);box-shadow:inset 0 0 0 2px var(--surface);outline:2px solid transparent;outline-offset:2px;transition:transform .3s var(--ease),outline-color .3s}
+.sw:hover{transform:scale(1.15)}
+.sw[aria-pressed="true"]{outline-color:var(--deep)}
+.sw.lg{width:28px;height:28px}
+.price{display:flex;gap:.7rem;align-items:baseline}
+.price b{font-weight:700}
+.price s{color:var(--muted);font-size:.9rem}
+
+/* ---------- البدل ---------- */
+.suits{display:grid;grid-template-columns:1fr 1.1fr;align-items:center;gap:clamp(1.5rem,4vw,4rem);background:var(--sky);overflow:hidden}
+.suits-copy{display:grid;gap:1.1rem;justify-items:start}
+.suits-copy p{max-width:44ch;font-size:1.1rem}
+.suits-art{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:start}
+.suits-art figure{aspect-ratio:3/4.4;overflow:hidden;border-radius:999px 999px 22px 22px;background:var(--surface);cursor:pointer;animation:float 9s ease-in-out infinite alternate}
+.suits-art figure:nth-child(2){margin-top:3rem;animation-delay:-4s}
+.suits-art img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.suits-art figure:hover img{transform:scale(1.05)}
+
+/* ---------- القصة والأرقام ---------- */
+.story{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,4rem);align-items:center;background:var(--surface)}
+.story-img{aspect-ratio:4/5;overflow:hidden;border-radius:999px 999px 24px 24px;background:var(--sky)}
+.story-img img{width:100%;height:100%;object-fit:cover}
+.story-copy{display:grid;gap:1.2rem}
+.story-copy p{max-width:46ch;color:var(--muted);font-size:1.08rem}
+.stats{display:flex;gap:clamp(1rem,3vw,2.6rem);flex-wrap:wrap;margin-top:.6rem}
+.stats div{display:grid}
+.stats b{font:700 clamp(2.2rem,5vw,3.4rem) 'El Messiri',serif;line-height:1.1}
+.stats span{color:var(--muted)}
+
+/* ---------- واتساب والفوتر ---------- */
+.wa{text-align:center;background:var(--deep);color:var(--on-deep);display:grid;gap:1rem;justify-items:center}
+.wa p{opacity:.85;max-width:46ch}
+.wa .cta{background:#fff;color:var(--deep)}
+.footer{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:3.2rem var(--pad) 2rem;background:var(--ink);color:#DCEAF6}
+html[data-theme="mono"] .footer{background:#0a0a0a}
+.footer h3{font-size:1.1rem;color:#fff;margin-bottom:.4rem}
+.footer .logo{font-size:2.4rem;color:#fff}
+.footer small{grid-column:1/-1;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.15);color:#9DB7D0}
+.visitors{margin-top:.6rem}
+.visitors b{font:600 1.35rem 'El Messiri',serif;color:#fff;margin-inline-start:.3rem}
+
+/* ---------- السلة والمفضلة ---------- */
+.overlay{position:fixed;inset:0;z-index:90;background:rgba(var(--shade),.4);backdrop-filter:blur(3px);animation:fade .3s both}
+.drawer{position:fixed;z-index:100;inset:0 auto 0 0;width:min(420px,92vw);display:flex;flex-direction:column;background:var(--surface);transform:translateX(-105%);transition:transform .55s var(--ease),box-shadow .55s,visibility 0s .55s;box-shadow:none;visibility:hidden}
+.drawer.open{transform:none;box-shadow:20px 0 60px rgba(var(--shade),.2);visibility:visible;transition-delay:0s}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.3rem;border-bottom:1px solid var(--line)}
+.d-list{list-style:none;padding:0 1.3rem;overflow:auto;flex:1}
+.d-list li{display:grid;grid-template-columns:64px 1fr auto;gap:.9rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--line)}
+.d-list li.empty{display:block;color:var(--muted);padding:2rem 0}
+.d-list img{width:64px;height:80px;object-fit:cover;border-radius:32px 32px 10px 10px;background:var(--sky)}
+.d-list strong{display:block;font-weight:500;line-height:1.4}
+.d-list small{display:block;color:var(--muted)}
+.qty,.fav-actions{display:flex;align-items:center;gap:.5rem}
+.qty button,.fav-actions button{min-width:28px;height:28px;padding:0 .5rem;border-radius:14px;background:var(--mist)}
+.qty button:hover,.fav-actions button:hover{background:var(--sky)}
+.drawer-foot{padding:1.2rem 1.3rem;border-top:1px solid var(--line);display:grid;gap:1rem}
+.total{display:flex;justify-content:space-between;font-size:1.15rem}
+.drawer .cta{background:var(--deep);color:var(--on-deep)}
+.drawer .cta[aria-disabled="true"]{opacity:.45;pointer-events:none}
+
+/* ---------- النافذة السريعة ---------- */
+.modal{position:fixed;inset:0;z-index:110;display:grid;place-items:center;padding:1rem;background:rgba(var(--shade),.45);backdrop-filter:blur(4px);animation:fade .3s both}
+.modal-box{position:relative;width:min(900px,100%);max-height:92vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border-radius:26px;animation:pop .45s var(--ease)}
+.modal-box>img{width:100%;height:100%;min-height:380px;object-fit:cover;background:var(--sky)}
+.modal-info{padding:2rem;display:grid;gap:.7rem;align-content:center}
+.modal-info h3{font-size:1.8rem}
+.modal-close{position:absolute;top:.7rem;inset-inline-end:.7rem;z-index:2;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);color:#1B2F4A}
+.sizes{display:flex;gap:.5rem;flex-wrap:wrap}
+.sizes button{min-width:46px;padding:.4rem .8rem;border-radius:12px;border:1px solid var(--line);transition:background .25s,color .25s}
+.sizes button[aria-pressed="true"]{background:var(--deep);color:var(--on-deep);border-color:var(--deep)}
+.modal-info .cta{background:var(--deep);color:var(--on-deep)}
+.modal-info .cta.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.toast{position:fixed;z-index:120;bottom:1.4rem;inset-inline:0;margin-inline:auto;width:max-content;max-width:90vw;padding:.7rem 1.4rem;border-radius:999px;background:var(--deep);color:var(--on-deep);opacity:0;transform:translateY(20px);pointer-events:none;transition:opacity .35s,transform .45s var(--ease)}
+.toast.show{opacity:1;transform:none}
+
+/* ---------- فيديو خلفية للأقسام ---------- */
+.bg-host{position:relative;isolation:isolate;overflow:hidden}
+.bg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;z-index:-2;opacity:0;transition:opacity 1.2s}
+.bg-video.on{opacity:1}
+.bg-video.back{object-fit:cover;filter:blur(28px);transform:scale(1.2);z-index:-3}
+.bg-host.has-bg::before{content:'';position:absolute;inset:0;z-index:-1;background:rgba(var(--shade),.4)}
+/* النصوص تصير بيضاء فوق الفيديو */
+.has-bg,.has-bg h2,.has-bg p,.has-bg .stats span,.has-bg .story-copy p{color:#fff}
+.has-bg .stats b{color:#fff}
+.suits.has-bg .cta.dark{background:#fff;color:var(--deep)}
+
+/* ---------- حركات ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.96) translateY(10px)}to{opacity:1;transform:none}}
+@keyframes float{from{transform:translateY(-8px)}to{transform:translateY(10px)}}
+@keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- الجوال ---------- */
+@media (max-width:900px){
+  .nav{display:none}
+  .search{flex:1;width:auto}
+  .hero-inner{grid-template-columns:1fr;padding-bottom:4rem}
+  .deal-card{justify-self:start}
+  .tiles{grid-template-columns:1fr;max-width:420px;margin-inline:auto}
+  .suits,.story{grid-template-columns:1fr}
+  .footer{grid-template-columns:1fr}
+  .modal-box{grid-template-columns:1fr}
+  .modal-box>img{min-height:260px;max-height:340px}
+  .quick{transform:none;inset:auto .6rem .6rem;padding:.4rem;font-size:.85rem}
+  .grid{grid-template-columns:repeat(2,1fr);gap:1.6rem .9rem}
+  .tools{margin-inline-start:0}
+}
+@media (max-width:480px){
+  .seg button{padding:.6rem 1.05rem}
+  .countdown div{min-width:58px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body data-gender="men">
+
+<header class="site-header" id="top">
+  <a class="logo" href="#top" aria-label="enzo - الرئيسية">enzo</a>
+  <nav class="nav" aria-label="التنقل الرئيسي">
+    <a href="#collections">التشكيلات</a>
+    <a href="#deals">العروض</a>
+    <a href="#shop">المتجر</a>
+    <a href="#suits">البدل</a>
+    <a href="#brands">الماركات</a>
+  </nav>
+  <div class="search" role="search">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="search" type="search" placeholder="ابحث باسم الماركة" autocomplete="off" aria-label="ابحث باسم الماركة أو المنتج">
+    <div class="suggest" id="suggest" hidden></div>
+  </div>
+  <div class="icons">
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="تبديل الألوان" title="تبديل الألوان: أزرق هادئ أو أبيض وأسود">
+      <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor"/></svg>
+    </button>
+    <button class="icon-btn" id="openFav" type="button" aria-label="المفضلة">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg>
+      <span class="count" id="favCount" data-n="0"></span>
+    </button>
+    <button class="icon-btn" id="openCart" type="button" aria-label="فتح السلة">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+      <span class="count" id="cartCount" data-n="0"></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- الواجهة: صورة ثم فيديو في الخلفية -->
+  <section class="hero" id="home">
+    <img class="hero-photo" src="hero.jpg" data-alt="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1800&q=80" alt="">
+    <video id="heroBack" class="hero-video back" muted loop playsinline autoplay preload="auto" aria-hidden="true"></video>
+    <video id="heroVideo" class="hero-video" muted loop playsinline autoplay preload="auto" aria-hidden="true"></video>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="kicker">تشكيلة خريف 2026، خصومات تصل إلى <b id="maxDisc">35</b>٪</p>
+        <h1 class="wordmark" aria-label="enzo"><span>e</span><span>n</span><span>z</span><span>o</span></h1>
+        <p class="hero-sub" id="heroSub">بدل وقمصان بقصّات هادئة</p>
+        <div class="seg" role="group" aria-label="اختر القسم">
+          <button data-g="men" type="button">رجالي</button>
+          <button data-g="women" type="button">نسائي</button>
+          <button data-g="acc" type="button">إكسسوارات</button>
+          <span class="thumb" aria-hidden="true"></span>
+        </div>
+        <a class="cta" href="#shop">تصفّح المجموعة</a>
+      </div>
+      <button class="deal-card" id="dealCard" type="button" aria-label="عرض اليوم"></button>
+    </div>
+    <a class="scroll-hint" href="#collections" aria-label="انزل للأسفل"><span></span></a>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
+
+  <!-- التشكيلات -->
+  <section class="sec" id="collections">
+    <div class="sec-head">
+      <h2>التشكيلات</h2>
+      <p>ثلاثة أقسام، اختر ما يناسبك وابدأ من هنا.</p>
+    </div>
+    <div class="tiles">
+      <a class="tile" href="#shop" data-g="men">
+        <img src="collections/men.jpg" data-alt="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?auto=format&fit=crop&w=900&q=80" alt="تشكيلة الرجال" loading="lazy">
+        <div class="tile-info"><h3>رجالي</h3><span id="cnt-men"></span></div>
+      </a>
+      <a class="tile" href="#shop" data-g="women">
+        <img src="collections/women.jpg" data-alt="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80" alt="تشكيلة النساء" loading="lazy">
+        <div class="tile-info"><h3>نسائي</h3><span id="cnt-women"></span></div>
+      </a>
+      <a class="tile" href="#shop" data-g="acc">
+        <img src="collections/accessories.jpg" data-alt="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?auto=format&fit=crop&w=900&q=80" alt="الإكسسوارات" loading="lazy">
+        <div class="tile-info"><h3>إكسسوارات</h3><span id="cnt-acc"></span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- الماركات -->
+  <section class="sec brands" id="brands">
+    <h2>تسوّق باسم الماركة</h2>
+    <div class="brand-list" id="brandList"></div>
+  </section>
+
+  <!-- الخصومات -->
+  <section class="sec deals" id="deals">
+    <div class="sec-head">
+      <div>
+        <h2>أكبر الخصومات</h2>
+        <p>تنتهي العروض بعد</p>
+      </div>
+      <div class="countdown" id="countdown" aria-label="الوقت المتبقي للعرض">
+        <div><b>00</b><span>يوم</span></div>
+        <div><b>00</b><span>ساعة</span></div>
+        <div><b>00</b><span>دقيقة</span></div>
+        <div><b>00</b><span>ثانية</span></div>
+      </div>
+    </div>
+    <div class="deals-row" id="dealsRow"></div>
+  </section>
+
+  <!-- المتجر -->
+  <section class="sec shop" id="shop">
+    <div class="sec-head">
+      <h2 id="collTitle">مجموعة الرجال</h2>
+      <div class="seg on-light" role="group" aria-label="اختر القسم">
+        <button data-g="men" type="button">رجالي</button>
+        <button data-g="women" type="button">نسائي</button>
+        <button data-g="acc" type="button">إكسسوارات</button>
+        <span class="thumb" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="toolbar">
+      <div class="row"><span class="lbl">النوع</span><div class="chips" id="chips" role="group" aria-label="النوع"></div></div>
+      <div class="row">
+        <span class="lbl">اللون</span><div id="colorFilter" role="group" aria-label="تصفية حسب اللون"></div>
+        <div class="tools">
+          <label class="switch"><input type="checkbox" id="saleOnly"><span class="track"></span><span>خصومات فقط</span></label>
+          <select id="sort" aria-label="ترتيب المنتجات">
+            <option value="featured">الترتيب: المميز</option>
+            <option value="discount">الأعلى خصمًا</option>
+            <option value="low">السعر: من الأقل</option>
+            <option value="high">السعر: من الأعلى</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <p class="result-info" id="resultInfo" aria-live="polite"></p>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <!-- قسم البدل: فيديو خلفية 2 -->
+  <section class="sec suits" id="suits" data-bg-video="bg-suits.mp4">
+    <div class="suits-copy">
+      <h2>قسم البدل</h2>
+      <p>قصّات مضبوطة وأقمشة خفيفة بدرجات الأزرق الهادئة، للعمل وللمناسبات.</p>
+      <button class="cta dark" id="goSuits" type="button">شاهد البدل</button>
+    </div>
+    <div class="suits-art" id="suitsArt"></div>
+  </section>
+
+  <!-- القصة والأرقام: فيديو خلفية 3 -->
+  <section class="sec story" id="about" data-bg-video="bg-story.mp4">
+    <div class="story-img"><img src="about.jpg" data-alt="https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=1000&q=80" alt="enzo" loading="lazy"></div>
+    <div class="story-copy">
+      <h2>enzo، ملابس بلون السماء</h2>
+      <p>اخترنا قطعًا هادئة تناسب يومك من الصباح للمساء، بقصّات نظيفة وألوان مريحة للعين، من البدلة الرسمية إلى الإطلالة اليومية.</p>
+      <div class="stats">
+        <div><b data-count="0" id="stProducts">0</b><span>قطعة في المتجر</span></div>
+        <div><b data-count="0" id="stBrands">0</b><span>ماركة</span></div>
+        <div><b data-count="0" id="stDisc">0</b><span>٪ أعلى خصم</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- واتساب: فيديو خلفية 4 -->
+  <section class="sec wa" data-bg-video="bg-wa.mp4">
+    <h2>عروض enzo تصلك أولًا</h2>
+    <p>راسلنا على واتساب لتصلك الخصومات الجديدة والقطع الجديدة.</p>
+    <a class="cta" id="waJoin" href="#" target="_blank" rel="noopener">راسلنا على واتساب</a>
+  </section>
+</main>
+
+<footer class="footer">
+  <div>
+    <a class="logo" href="#top">enzo</a>
+    <p>أناقة هادئة بلون السماء.</p>
+    <p class="visitors">عدد الزوار: <b id="visitors">...</b></p>
+  </div>
+  <div>
+    <h3>تواصل معنا</h3>
+    <p>واتساب: <span dir="ltr" id="waShow"></span></p>
+    <p>عنوان المتجر هنا</p>
+  </div>
+  <div>
+    <h3>ساعات العمل</h3>
+    <p>كل يوم من 10 صباحًا إلى 10 مساءً</p>
+  </div>
+  <small>© enzo. جميع الحقوق محفوظة.</small>
+</footer>
+
+<!-- السلة -->
+<div class="overlay" id="overlay" hidden></div>
+<aside class="drawer" id="cartDrawer" aria-label="سلة التسوق" aria-hidden="true">
+  <div class="drawer-head"><h2>سلة التسوق</h2><button class="icon-btn" data-close aria-label="إغلاق">✕</button></div>
+  <ul class="d-list" id="cartList"></ul>
+  <div class="drawer-foot">
+    <div class="total"><span>الإجمالي</span><b id="cartTotal">0</b></div>
+    <a class="cta full" id="checkout" href="#" target="_blank" rel="noopener">أرسل الطلب عبر واتساب</a>
+  </div>
+</aside>
+
+<!-- المفضلة -->
+<aside class="drawer" id="favDrawer" aria-label="المفضلة" aria-hidden="true">
+  <div class="drawer-head"><h2>المفضلة</h2><button class="icon-btn" data-close aria-label="إغلاق">✕</button></div>
+  <ul class="d-list" id="favList"></ul>
+</aside>
+
+<!-- نظرة سريعة -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="تفاصيل المنتج" hidden>
+  <div class="modal-box" id="modalBox"></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============ إعدادات المتجر: عدّلها بسهولة ============ */
+const CURRENCY = '$';                         // العملة (مثلًا 'ج.س')
+const CURRENCY_BEFORE = true;                 // true: $120   false: 120 ج.س
+const WHATSAPP = '249000000000';              // رقم الواتساب بصيغة دولية بدون +
+const SALE_END = '2026-10-31T23:59:59';       // نهاية العروض
+const VISITOR_NS = 'enzo-store-demo';         // اسم فريد لمتجرك لعدّاد الزوار: غيّره لأي اسم تختاره
+const VISITOR_KEY = 'visitors';
+const VIDEOS = {                              // فيديو الواجهة: نفس الفيديو لكل الأقسام (ضعه جنب index.html)
+  men: 'hero.mp4', women: 'hero.mp4', acc: 'hero.mp4'
+};
+const HERO_TEXT = {
+  men:   { sub: 'بدل وقمصان بقصّات هادئة', title: 'مجموعة الرجال' },
+  women: { sub: 'فساتين وإطلالات بألوان السماء', title: 'مجموعة النساء' },
+  acc:   { sub: 'حقائب ونظارات تُكمل الإطلالة', title: 'الإكسسوارات' }
+};
+const CATS = { suit:'بدل', shirt:'قمصان', coat:'معاطف وجاكيتات', dress:'فساتين', look:'إطلالات', bag:'حقائب', glasses:'نظارات' };
+const TYPES = { suit:'بدلة', shirt:'قميص', coat:'معطف', dress:'فستان', look:'إطلالة', bag:'حقيبة', glasses:'نظارة' };
+const COLORS = {   // مفتاح: [الاسم، لون العينة]
+  black:['أسود','#1A1F26'], charcoal:['فحمي','#3C4654'], navy:['أزرق ملكي','#34527A'], denim:['أزرق دنيم','#5E8DB8'],
+  sky:['سماوي','#8DB8DE'], powder:['أزرق بودرة','#B6D6EE'], ice:['أزرق ثلجي','#CFE3F2'],
+  white:['أبيض','#EEF3F8'], gray:['رمادي','#A9B4C0'], slate:['رمادي مزرق','#7A8B9E'], beige:['بيج','#D8D2C4'], sand:['رملي','#C9BFAF']
+};
+const PHOTO = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=800&q=80`;
+
+/* المنتجات (أسماء وأسعار وماركات أمثلة، غيّرها بمنتجاتك).
+   الصور: ضع صورك في  products/ باسم معرّف المنتج (m01.jpg ...) فتُستخدم بدل صور Unsplash.
+   صورة لكل لون: imgs:{navy:'رابط أو مسار'} */
+const PRODUCTS = [
+  { id:'m01', g:'men', cat:'coat', brand:'Maison Bleu', name:'جاكيت أسود أساسي', fabric:'مبطّن', price:120, d:20, colors:['black','charcoal','navy'], ph:'1551028719-00167b16eac5' },
+  { id:'m02', g:'men', cat:'shirt', brand:'Nordic Linen', name:'قميص أوفر سايز كلاسيك', fabric:'قطن', price:75, d:0, colors:['white','ice','sky'], ph:'1602810318383-e386cc2a3ccf' },
+  { id:'m03', g:'men', cat:'coat', brand:'Casa Verona', name:'معطف أسود عصري', fabric:'صوف مخلوط', price:150, d:35, colors:['black','charcoal','slate'], ph:'1610652492500-ded49ceeb378' },
+  { id:'m04', g:'men', cat:'shirt', brand:'Oxford & Co', name:'قميص أبيض مينيمال', fabric:'قطن', price:65, d:15, colors:['white','ice'], ph:'1627225924765-552d49cf47ad' },
+  { id:'m05', g:'men', cat:'suit', brand:'Oxford & Co', name:'بدلة رسمية أنيقة', fabric:'صوف', price:280, d:25, colors:['navy','charcoal','gray'], ph:'1603394151492-5e9b974b090b' },
+  { id:'m06', g:'men', cat:'suit', brand:'Casa Verona', name:'بدلة عصرية', fabric:'صوف خفيف', price:320, d:0, colors:['navy','sky','gray'], ph:'1593032465175-481ac7f401a0' },
+  { id:'w01', g:'women', cat:'dress', brand:'Aurelia', name:'فستان أسود أنيق', fabric:'كريب', price:140, d:20, colors:['black','navy'], ph:'1539008835657-9e8e9680c956' },
+  { id:'w02', g:'women', cat:'dress', brand:'Silk Road', name:'فستان مينيمال', fabric:'حرير', price:110, d:0, colors:['white','powder','sand'], ph:'1595777457583-95e059d581b8' },
+  { id:'w03', g:'women', cat:'look', brand:'Marina', name:'إطلالة صيفية عصرية', fabric:'كتان', price:95, d:30, colors:['powder','white','sky'], ph:'1581044777550-4cfa60707c03' },
+  { id:'w04', g:'women', cat:'look', brand:'Aurelia', name:'إطلالة سهرة فاخرة', fabric:'ساتان', price:180, d:0, colors:['navy','black','powder'], ph:'1566174053879-31528523f8ae' },
+  { id:'a01', g:'acc', cat:'bag', brand:'Enzo Atelier', name:'حقيبة جلدية', fabric:'جلد', price:90, d:15, colors:['black','sand','navy'], ph:'1548036328-c9fa89d128fa', one:true },
+  { id:'a02', g:'acc', cat:'glasses', brand:'Marina', name:'نظارة شمسية كلاسيك', fabric:'أسيتات', price:55, d:0, colors:['black','sand'], ph:'1511499767150-a48a237f0083', one:true }
+].map(p => ({
+  ...p,
+  sale: p.d ? Math.round(p.price * (100 - p.d) / 100) : p.price,
+  photo: PHOTO(p.ph),
+  sizes: p.one ? ['مقاس واحد'] : ['S','M','L','XL']
+}));
+
+/* ============ أدوات ============ */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const fmt = n => n.toLocaleString('en-US');
+const money = n => CURRENCY_BEFORE ? CURRENCY + fmt(n) : fmt(n) + ' ' + CURRENCY;
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const norm = s => String(s).toLowerCase().trim().normalize('NFKD').replace(/[\u064B-\u065F\u0640]/g, '');
+const byId = id => PRODUCTS.find(p => p.id === id);
+const hexOf = k => COLORS[k][1];
+const imgFor = (p, k) => p.imgs?.[k] || `products/${p.id}.jpg`;
+const store = {
+  get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+};
+
+/* ============ رسمات بديلة تظهر فقط إذا فشلت كل الصور ============ */
+function shade(hex, a) {
+  const n = parseInt(hex.slice(1), 16), c = v => Math.max(0, Math.min(255, v));
+  return '#' + [(n >> 16) + a, (n >> 8 & 255) + a, (n & 255) + a].map(v => c(v).toString(16).padStart(2, '0')).join('');
+}
+const SHAPES = {
+  shirt: (c, d) => `<path d="M100 70L130 55Q150 78 170 55L200 70L250 112L228 152L205 136V322H95V136L72 152L50 112Z" fill="${c}"/><path d="M130 55L150 100L170 55Z" fill="#fff" fill-opacity=".9"/><path d="M150 100V322" stroke="${d}" stroke-opacity=".35"/>`,
+  suit: (c, d) => `<path d="M98 62L150 130L202 62L248 84L258 330H42L52 84Z" fill="${c}"/><path d="M112 56L188 56L150 132Z" fill="#fff" fill-opacity=".92"/><path d="M98 62L150 130L124 190L84 124Z" fill="${d}"/><path d="M202 62L150 130L176 190L216 124Z" fill="${d}"/><path d="M150 190V330" stroke="${d}" stroke-width="2"/>`,
+  coat: (c, d) => `<path d="M100 55L150 112L200 55L250 86L264 346H36L50 86Z" fill="${c}"/><path d="M100 55L150 112L120 180L80 120Z" fill="${d}"/><path d="M200 55L150 112L180 180L220 120Z" fill="${d}"/><rect x="46" y="205" width="208" height="14" fill="${d}"/>`,
+  dress: (c, d) => `<path d="M118 40L132 40Q150 78 168 40L182 40L192 130L252 340H48L108 130Z" fill="${c}"/><path d="M108 130H192" stroke="${d}" stroke-width="6"/>`,
+  bag: (c, d) => `<rect x="70" y="140" width="160" height="150" rx="16" fill="${c}"/><path d="M105 140V112a45 45 0 0 1 90 0v28" fill="none" stroke="${d}" stroke-width="10"/><rect x="70" y="185" width="160" height="12" fill="${d}" fill-opacity=".45"/>`,
+  glasses: (c, d) => `<ellipse cx="100" cy="190" rx="52" ry="40" fill="${c}"/><ellipse cx="200" cy="190" rx="52" ry="40" fill="${c}"/><path d="M150 186Q150 174 150 186" stroke="${d}" stroke-width="6" fill="none"/><path d="M50 182L22 160M250 182L278 160" stroke="${d}" stroke-width="6"/>`
+};
+const ART_OF = { look: 'dress' };
+function art(cat, color) {
+  const d = shade(color, -40), shape = SHAPES[ART_OF[cat] || cat] || SHAPES.shirt;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 380"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6FBFF"/><stop offset="1" stop-color="#D2E6F5"/></linearGradient></defs><rect width="300" height="380" fill="url(#g)"/><circle cx="150" cy="200" r="130" fill="#fff" fill-opacity=".45"/>${shape(color, d)}</svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+// سلسلة البدائل: صورتك المحلية ← صورة Unsplash ← رسمة بنفس اللون
+document.addEventListener('error', e => {
+  const t = e.target;
+  if (t.tagName !== 'IMG') return;
+  if (t.dataset.alt && !t.dataset.altDone) { t.dataset.altDone = 1; t.src = t.dataset.alt; return; }
+  if (!t.dataset.id) return;
+  const p = byId(t.dataset.id); if (!p) return;
+  const step = +(t.dataset.fb || 0);
+  if (step === 0) { t.dataset.fb = 1; t.src = p.photo; }
+  else if (step === 1) { t.dataset.fb = 2; t.src = art(p.cat, hexOf(t.dataset.color || p.colors[0])); }
+}, true);
+
+/* ============ الحالة ============ */
+const state = {
+  g: 'men', cat: 'all', color: 'all', q: '', sale: false, sort: 'featured', sel: {},
+  cart: store.get('enzo-cart', []).filter(c => byId(c.id)).map(c => ({ ...c, color: c.color || byId(c.id).colors[0] })),
+  fav: new Set(store.get('enzo-fav', []).filter(id => byId(id)))
+};
+const BRANDS = Object.values(PRODUCTS.reduce((m, p) => { (m[p.brand] ??= { name: p.brand, n: 0 }).n++; return m; }, {}));
+const grid = $('#grid'), chips = $('#chips'), info = $('#resultInfo'), search = $('#search'), suggestBox = $('#suggest');
+const video = $('#heroVideo'), heroBack = $('#heroBack'), toast = $('#toast');
+const curColor = p => state.sel[p.id] || (p.colors.includes(state.color) ? state.color : p.colors[0]);
+
+/* ============ العرض ============ */
+function card(p, i = 0) {
+  const fav = state.fav.has(p.id), ck = curColor(p);
+  return `<article class="card" data-id="${p.id}" style="--i:${i}">
+    <div class="card-media">
+      <img src="${imgFor(p, ck)}" data-id="${p.id}" data-color="${ck}" alt="${esc(p.name)} من ${esc(p.brand)}" loading="lazy">
+      ${p.d ? `<span class="badge">خصم ${p.d}٪</span>` : ''}
+      <button class="heart ${fav ? 'on' : ''}" data-act="fav" aria-pressed="${fav}" aria-label="إضافة للمفضلة"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg></button>
+      <button class="quick" data-act="view">نظرة سريعة</button>
+    </div>
+    <div class="card-body">
+      <span class="brand">${esc(p.brand)}</span>
+      <h3>${esc(p.name)}</h3>
+      <p class="meta">${TYPES[p.cat]}، ${esc(p.fabric)}</p>
+      <div class="swatches" role="group" aria-label="الألوان">${p.colors.map(k => `<button type="button" class="sw" data-color="${k}" style="--c:${hexOf(k)}" aria-pressed="${k === ck}" aria-label="${COLORS[k][0]}" title="${COLORS[k][0]}"></button>`).join('')}</div>
+      <div class="price">${p.d ? `<b>${money(p.sale)}</b><s>${money(p.price)}</s>` : `<b>${money(p.price)}</b>`}</div>
+    </div>
+  </article>`;
+}
+
+function filtered() {
+  const q = norm(state.q);
+  let l = PRODUCTS.filter(p => p.g === state.g);
+  if (state.cat !== 'all') l = l.filter(p => p.cat === state.cat);
+  if (state.sale) l = l.filter(p => p.d > 0);
+  if (state.color !== 'all') l = l.filter(p => p.colors.includes(state.color));
+  if (q) l = l.filter(p => norm(p.brand + ' ' + p.name).includes(q));
+  if (state.sort === 'low') l.sort((a, b) => a.sale - b.sale);
+  if (state.sort === 'high') l.sort((a, b) => b.sale - a.sale);
+  if (state.sort === 'discount') l.sort((a, b) => b.d - a.d);
+  return l;
+}
+
+function renderChips() {
+  const cats = [...new Set(PRODUCTS.filter(p => p.g === state.g).map(p => p.cat))];
+  chips.innerHTML = ['all', ...cats].map(c =>
+    `<button type="button" data-cat="${c}" aria-pressed="${state.cat === c}">${c === 'all' ? 'الكل' : CATS[c]}</button>`).join('');
+}
+function renderColors() {
+  const keys = [...new Set(PRODUCTS.filter(p => p.g === state.g).flatMap(p => p.colors))];
+  $('#colorFilter').innerHTML =
+    `<button type="button" class="all" data-color-filter="all" aria-pressed="${state.color === 'all'}">الكل</button>` +
+    keys.map(k => `<button type="button" class="sw lg" data-color-filter="${k}" style="--c:${hexOf(k)}" aria-pressed="${state.color === k}" aria-label="${COLORS[k][0]}" title="${COLORS[k][0]}"></button>`).join('');
+}
+function renderGrid(animate = true) {
+  const list = filtered();
+  if (list.length) {
+    grid.innerHTML = list.map((p, i) => card(p, i)).join('');
+  } else {
+    const other = PRODUCTS.filter(p => p.g !== state.g && norm(p.brand + ' ' + p.name).includes(norm(state.q))).length;
+    grid.innerHTML = `<div class="empty-state"><p>لا توجد منتجات مطابقة في هذا القسم.</p>${
+      state.q && other ? `<button class="link" data-act="other">يوجد ${other} منتج في قسم آخر، اعرضها</button>` : ''}</div>`;
+  }
+  if (animate) { grid.classList.remove('swap'); void grid.offsetWidth; grid.classList.add('swap'); }
+  info.textContent = state.q ? `${list.length} نتيجة لـ «${state.q}»` : `${list.length} منتج`;
+  if (state.q) {
+    const b = document.createElement('button');
+    b.className = 'link'; b.type = 'button'; b.textContent = 'مسح البحث'; b.onclick = clearSearch;
+    info.append(' ', b);
+  }
+}
+function renderDeals() {
+  const l = PRODUCTS.filter(p => p.g === state.g && p.d).sort((a, b) => b.d - a.d).slice(0, 8);
+  $('#dealsRow').innerHTML = l.length ? l.map((p, i) => card(p, i)).join('') : '<p style="padding:1rem var(--pad);color:var(--muted)">لا توجد خصومات في هذا القسم الآن.</p>';
+}
+function renderBrands() {
+  $('#brandList').innerHTML = BRANDS.map(b => `<button type="button" data-brand="${esc(b.name)}">${esc(b.name)}<sup>${b.n}</sup></button>`).join('');
+  const ticker = [...BRANDS.map(b => b.name), `خصومات حتى ${Math.max(...PRODUCTS.map(p => p.d))}٪`, 'تشكيلة خريف 2026', 'بدل رجالية', 'إطلالات نسائية'];
+  const html = ticker.map((t, i) => `<span class="${t.startsWith('خصومات') ? 'sale' : ''}">${esc(t)}</span>`).join('');
+  $('#marquee').innerHTML = html + html;
+}
+function renderAll(animate = true) { renderChips(); renderColors(); renderGrid(animate); renderDeals(); }
+
+function renderDealCard() {
+  const p = [...PRODUCTS].sort((a, b) => b.d - a.d)[0]; if (!p || !p.d) { $('#dealCard').hidden = true; return; }
+  const btn = $('#dealCard'); btn.dataset.id = p.id;
+  btn.innerHTML = `<img src="${imgFor(p, p.colors[0])}" data-id="${p.id}" data-color="${p.colors[0]}" alt="">
+    <span><small>عرض اليوم</small><b>${esc(p.name)}</b>
+    <span class="dc-price"><b>${money(p.sale)}</b><s>${money(p.price)}</s><span class="dc-tag">-${p.d}٪</span></span>
+    <small id="dealLeft"></small></span>`;
+}
+
+/* ============ القسم رجالي / نسائي / إكسسوارات ============ */
+function setGender(g) {
+  if (!HERO_TEXT[g] || g === state.g) return;
+  state.g = g; state.cat = 'all'; state.color = 'all';
+  document.body.dataset.gender = g;
+  const sub = $('#heroSub');
+  sub.classList.add('swap');
+  setTimeout(() => { sub.textContent = HERO_TEXT[g].sub; sub.classList.remove('swap'); }, 300);
+  $('#collTitle').textContent = HERO_TEXT[g].title;
+  setVideo(g);
+  renderAll();
+}
+function setVideo(g) {
+  const src = VIDEOS[g];
+  if (video.getAttribute('src') === src) return;   // نفس الفيديو: لا تعيد التحميل
+  [video, heroBack].forEach(v => { v.classList.remove('on'); v.src = src; v.load(); tryPlay(v); });
+}
+video.dataset.want = '1'; video.dataset.label = 'hero';
+heroBack.dataset.want = '1'; heroBack.dataset.label = 'hero-back';
+[video, heroBack].forEach(v => {
+  v.addEventListener('playing', () => v.classList.add('on'));
+  v.addEventListener('error', () => v.classList.remove('on'));
+});
+
+/* ============ البحث باسم الماركة ============ */
+function pickBrand(name) {
+  search.value = name; state.q = name; state.cat = 'all';
+  suggestBox.hidden = true; renderAll();
+  $('#shop').scrollIntoView({ behavior: 'smooth' });
+}
+function clearSearch() { search.value = ''; state.q = ''; suggestBox.hidden = true; renderGrid(false); }
+function suggest() {
+  const q = norm(search.value);
+  if (!q) { suggestBox.hidden = true; return; }
+  const bs = BRANDS.filter(b => norm(b.name).includes(q)).slice(0, 4);
+  const ps = PRODUCTS.filter(p => norm(p.name).includes(q)).slice(0, 3);
+  suggestBox.innerHTML = (bs.length || ps.length)
+    ? bs.map(b => `<button type="button" data-brand="${esc(b.name)}"><span dir="ltr">${esc(b.name)}</span><small>${b.n} منتج</small></button>`).join('') +
+      ps.map(p => `<button type="button" data-pid="${p.id}"><span>${esc(p.name)}</span><small dir="ltr">${esc(p.brand)}</small></button>`).join('')
+    : '<p>لا توجد ماركة بهذا الاسم.</p>';
+  suggestBox.hidden = false;
+}
+search.addEventListener('input', () => { state.q = search.value; suggest(); renderGrid(false); });
+search.addEventListener('keydown', e => { if (e.key === 'Enter') { suggestBox.hidden = true; $('#shop').scrollIntoView({ behavior: 'smooth' }); } });
+suggestBox.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.brand) pickBrand(b.dataset.brand);
+  if (b.dataset.pid) { const p = byId(b.dataset.pid); setGender(p.g); suggestBox.hidden = true; openModal(p.id); }
+});
+document.addEventListener('click', e => { if (!e.target.closest('.search')) suggestBox.hidden = true; });
+
+/* ============ أحداث عامة ============ */
+document.addEventListener('click', e => {
+  const g = e.target.closest('[data-g]'); if (g) setGender(g.dataset.g);
+  const br = e.target.closest('#brandList [data-brand]'); if (br) pickBrand(br.dataset.brand);
+  const cf = e.target.closest('[data-color-filter]');
+  if (cf) { state.color = cf.dataset.colorFilter; renderColors(); renderGrid(); }
+  const ch = e.target.closest('#chips [data-cat]');
+  if (ch) { state.cat = ch.dataset.cat; renderChips(); renderGrid(); }
+  if (e.target.closest('[data-act="other"]')) {
+    const q = norm(state.q), target = PRODUCTS.find(p => p.g !== state.g && norm(p.brand + ' ' + p.name).includes(q));
+    if (target) setGender(target.g);
+  }
+});
+$('#saleOnly').addEventListener('change', e => { state.sale = e.target.checked; renderGrid(); });
+$('#sort').addEventListener('change', e => { state.sort = e.target.value; renderGrid(); });
+$('#goSuits').addEventListener('click', () => {
+  if (state.g !== 'men') setGender('men');
+  state.cat = 'suit'; renderChips(); renderGrid();
+  $('#shop').scrollIntoView({ behavior: 'smooth' });
+});
+$('#dealCard').addEventListener('click', e => openModal(e.currentTarget.dataset.id));
+
+function cardClick(e) {
+  const c = e.target.closest('.card'); if (!c) return;
+  const id = c.dataset.id, p = byId(id);
+  const sw = e.target.closest('.sw');
+  if (sw) {
+    const k = sw.dataset.color, img = $('.card-media img', c);
+    state.sel[id] = k; img.dataset.color = k;
+    if (p.imgs?.[k]) { delete img.dataset.fb; img.src = p.imgs[k]; }
+    $$('.sw', c).forEach(b => b.setAttribute('aria-pressed', b === sw));
+    return;
+  }
+  if (e.target.closest('[data-act="fav"]')) { toggleFav(id); const on = state.fav.has(id); $$(`.card[data-id="${id}"] .heart`).forEach(h => { h.classList.toggle('on', on); h.setAttribute('aria-pressed', on); }); return; }
+  openModal(id);
+}
+grid.addEventListener('click', cardClick);
+$('#dealsRow').addEventListener('click', cardClick);
+
+const header = $('.site-header');
+const onScroll = () => header.classList.toggle('solid', scrollY > 60);
+addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+/* ============ الثيم ============ */
+function setTheme(t) { document.documentElement.dataset.theme = t; store.set('enzo-theme', t); }
+$('#themeBtn').addEventListener('click', () => {
+  const next = document.documentElement.dataset.theme === 'sky' ? 'mono' : 'sky';
+  setTheme(next); showToast(next === 'sky' ? 'ألوان أزرق هادئ' : 'ألوان أبيض وأسود');
+});
+setTheme(store.get('enzo-theme', 'sky'));
+
+/* ============ المفضلة ============ */
+function toggleFav(id) {
+  state.fav.has(id) ? state.fav.delete(id) : state.fav.add(id);
+  store.set('enzo-fav', [...state.fav]); renderFav();
+}
+function renderFav() {
+  const items = [...state.fav].map(byId).filter(Boolean);
+  const n = $('#favCount'); n.textContent = items.length || ''; n.dataset.n = items.length;
+  $('#favList').innerHTML = items.length ? items.map(p => `
+    <li><img src="${imgFor(p, p.colors[0])}" data-id="${p.id}" data-color="${p.colors[0]}" alt="">
+      <div><strong>${esc(p.name)}</strong><small dir="auto">${esc(p.brand)}</small><b>${money(p.sale)}</b></div>
+      <div class="fav-actions"><button data-fav-view="${p.id}">عرض</button><button data-fav-del="${p.id}" aria-label="حذف من المفضلة">✕</button></div></li>`).join('')
+    : '<li class="empty">لم تضف أي قطعة للمفضلة بعد. اضغط على القلب في أي منتج.</li>';
+}
+$('#favList').addEventListener('click', e => {
+  const v = e.target.closest('[data-fav-view]'), d = e.target.closest('[data-fav-del]');
+  if (v) { closeDrawers(); openModal(v.dataset.favView); }
+  if (d) { toggleFav(d.dataset.favDel); $$(`.card[data-id="${d.dataset.favDel}"] .heart`).forEach(h => { h.classList.remove('on'); h.setAttribute('aria-pressed', false); }); }
+});
+
+/* ============ النافذة السريعة ============ */
+let lastFocus = null, modalSize = null, modalColor = null;
+function openModal(id) {
+  const p = byId(id); if (!p) return;
+  lastFocus = document.activeElement; modalSize = p.sizes.length === 1 ? p.sizes[0] : 'M'; modalColor = curColor(p);
+  $('#modalBox').innerHTML = `
+    <button class="modal-close" id="closeModal" aria-label="إغلاق">✕</button>
+    <img id="modalImg" src="${imgFor(p, modalColor)}" data-id="${p.id}" data-color="${modalColor}" alt="${esc(p.name)}">
+    <div class="modal-info">
+      <span class="brand">${esc(p.brand)}</span>
+      <h3>${esc(p.name)}</h3>
+      <p class="meta">${TYPES[p.cat]}، ${esc(p.fabric)}</p>
+      <div class="price">${p.d ? `<b>${money(p.sale)}</b><s>${money(p.price)}</s><span class="badge" style="position:static">خصم ${p.d}٪</span>` : `<b>${money(p.price)}</b>`}</div>
+      <p>اللون: <b id="colorName">${COLORS[modalColor][0]}</b></p>
+      <div class="swatches" id="colorPick">${p.colors.map(k => `<button type="button" class="sw lg" data-color="${k}" style="--c:${hexOf(k)}" aria-pressed="${k === modalColor}" aria-label="${COLORS[k][0]}" title="${COLORS[k][0]}"></button>`).join('')}</div>
+      ${p.sizes.length > 1 ? `<p>اختر المقاس:</p><div class="sizes" id="sizes">${p.sizes.map(s => `<button type="button" data-size="${s}" aria-pressed="${s === 'M'}">${s}</button>`).join('')}</div>` : ''}
+      <button class="cta" id="addBtn" type="button">أضف إلى السلة</button>
+      <a class="cta ghost" id="waOne" href="#" target="_blank" rel="noopener">اطلب هذه القطعة عبر واتساب</a>
+    </div>`;
+  $('#modal').hidden = false; document.body.classList.add('locked');
+  $('#closeModal').focus();
+  const wa = () => {
+    const msg = `مرحبًا enzo، أريد طلب: ${p.name} (${p.brand}) اللون ${COLORS[modalColor][0]}${p.sizes.length > 1 ? ' المقاس ' + modalSize : ''} بسعر ${money(p.sale)}`;
+    $('#waOne').href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+  };
+  wa();
+  $('#colorPick').onclick = e => {
+    const b = e.target.closest('[data-color]'); if (!b) return;
+    modalColor = b.dataset.color;
+    if (p.imgs?.[modalColor]) { const img = $('#modalImg'); delete img.dataset.fb; img.src = p.imgs[modalColor]; }
+    $('#colorName').textContent = COLORS[modalColor][0];
+    $$('#colorPick button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    wa();
+  };
+  if ($('#sizes')) $('#sizes').onclick = e => {
+    const b = e.target.closest('[data-size]'); if (!b) return;
+    modalSize = b.dataset.size;
+    $$('#sizes button').forEach(x => x.setAttribute('aria-pressed', x === b)); wa();
+  };
+  $('#addBtn').onclick = () => { addToCart(p.id, modalSize, modalColor); closeModal(); openDrawer('cartDrawer'); };
+  $('#closeModal').onclick = closeModal;
+}
+function closeModal() {
+  $('#modal').hidden = true; document.body.classList.remove('locked');
+  lastFocus?.focus?.();
+}
+$('#modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
+
+/* ============ السلة ============ */
+function saveCart() { store.set('enzo-cart', state.cart); }
+function addToCart(id, size, color) {
+  const hit = state.cart.find(c => c.id === id && c.size === size && c.color === color);
+  hit ? hit.qty++ : state.cart.push({ id, size, color, qty: 1 });
+  saveCart(); renderCart(); showToast('أُضيفت القطعة إلى السلة');
+}
+function renderCart() {
+  const items = state.cart.map(c => ({ ...c, p: byId(c.id) }));
+  const total = items.reduce((s, i) => s + i.p.sale * i.qty, 0);
+  const n = items.reduce((s, i) => s + i.qty, 0);
+  $('#cartCount').textContent = n || ''; $('#cartCount').dataset.n = n;
+  const sz = i => i.p.sizes.length > 1 ? `، المقاس ${i.size}` : '';
+  $('#cartList').innerHTML = items.length ? items.map((i, k) => `
+    <li>
+      <img src="${imgFor(i.p, i.color)}" data-id="${i.p.id}" data-color="${i.color}" alt="">
+      <div><strong>${esc(i.p.name)}</strong><small dir="auto">${esc(i.p.brand)}، ${COLORS[i.color][0]}${sz(i)}</small><b>${money(i.p.sale * i.qty)}</b></div>
+      <div class="qty"><button data-q="-1" data-i="${k}" aria-label="تقليل الكمية">−</button><span>${i.qty}</span><button data-q="1" data-i="${k}" aria-label="زيادة الكمية">+</button></div>
+    </li>`).join('') : '<li class="empty">سلتك فارغة. اختر قطعة تعجبك وأضفها هنا.</li>';
+  $('#cartTotal').textContent = money(total);
+  const msg = 'مرحبًا enzo، أريد طلب:\n' + items.map(i => `- ${i.p.name} (${i.p.brand}) اللون ${COLORS[i.color][0]}${i.p.sizes.length > 1 ? ' المقاس ' + i.size : ''} × ${i.qty}`).join('\n') + `\nالإجمالي: ${money(total)}`;
+  const co = $('#checkout');
+  co.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+  co.setAttribute('aria-disabled', items.length ? 'false' : 'true');
+}
+$('#cartList').addEventListener('click', e => {
+  const b = e.target.closest('[data-q]'); if (!b) return;
+  const it = state.cart[+b.dataset.i]; it.qty += +b.dataset.q;
+  if (it.qty <= 0) state.cart.splice(+b.dataset.i, 1);
+  saveCart(); renderCart();
+});
+
+/* ============ الأدراج ============ */
+const overlay = $('#overlay');
+function openDrawer(id) {
+  closeDrawers(true);
+  const d = $('#' + id); d.classList.add('open'); d.setAttribute('aria-hidden', 'false');
+  overlay.hidden = false; document.body.classList.add('locked');
+  $('[data-close]', d).focus();
+}
+function closeDrawers(keepLock) {
+  $$('.drawer').forEach(d => { d.classList.remove('open'); d.setAttribute('aria-hidden', 'true'); });
+  overlay.hidden = true; if (!keepLock) document.body.classList.remove('locked');
+}
+$('#openCart').addEventListener('click', () => openDrawer('cartDrawer'));
+$('#openFav').addEventListener('click', () => openDrawer('favDrawer'));
+$$('[data-close]').forEach(b => b.addEventListener('click', () => closeDrawers()));
+overlay.addEventListener('click', () => closeDrawers());
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  if (!$('#modal').hidden) closeModal(); else closeDrawers();
+  suggestBox.hidden = true;
+});
+
+let toastTimer;
+function showToast(t) {
+  toast.textContent = t; toast.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+}
+
+/* ============ العدّ التنازلي ============ */
+function tick() {
+  const t = Math.max(0, new Date(SALE_END) - Date.now());
+  const v = [Math.floor(t / 864e5), Math.floor(t / 36e5) % 24, Math.floor(t / 6e4) % 60, Math.floor(t / 1e3) % 60];
+  $$('#countdown b').forEach((b, i) => b.textContent = String(v[i]).padStart(2, '0'));
+  const left = $('#dealLeft'); if (left) left.textContent = `ينتهي بعد ${v[0]} يوم و${v[1]} ساعة`;
+}
+
+/* ============ عدد الزوار (يعدّ كل جهاز مرة واحدة، عبر counterapi.dev) ============ */
+async function visitors() {
+  const el = $('#visitors'); if (!el) return;
+  const base = `https://api.counterapi.dev/v1/${encodeURIComponent(VISITOR_NS)}/${encodeURIComponent(VISITOR_KEY)}`;
+  const seen = store.get('enzo-visited', false);
+  try {
+    const d = await (await fetch(seen ? base : base + '/up')).json();
+    const n = d.count ?? d.value;
+    if (typeof n !== 'number') throw new Error('bad response');
+    el.textContent = fmt(n); store.set('enzo-visited', true);
+  } catch { el.closest('.visitors').hidden = true; }
+}
+
+/* ============ أرقام متحركة ============ */
+function countUp(el, to) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = to; return; }
+  const t0 = performance.now(), dur = 1300;
+  const step = t => { const k = Math.min(1, (t - t0) / dur); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}
+
+/* ============ تشغيل الفيديوهات ============ */
+// للتشخيص: افتح الموقع بإضافة ?debugvideo في آخر الرابط لتظهر تفاصيل كل فيديو في Console
+const DEBUG_VIDEO = /[?&]debugvideo/.test(location.search);
+const allVideos = new Set();
+const ERR = { 1: 'تم إيقاف التحميل', 2: 'خطأ شبكة', 3: 'الفيديو تالف أو ترميزه غير مدعوم', 4: 'المسار خطأ (404) أو الترميز غير مدعوم' };
+function prepVideo(v, label) {
+  v.muted = true; v.defaultMuted = true; v.loop = true; v.playsInline = true;
+  v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
+  allVideos.add(v);
+  v.addEventListener('error', () => console.warn('تعذر تشغيل الفيديو:', label, '|', ERR[v.error?.code] || '', '|', v.currentSrc || v.src));
+  if (DEBUG_VIDEO) ['loadstart', 'loadeddata', 'canplay', 'playing', 'stalled'].forEach(ev => v.addEventListener(ev, () => console.log('[video]', label, ev)));
+}
+function tryPlay(v) {
+  const p = v.play();
+  if (p && p.catch) p.catch(err => { if (DEBUG_VIDEO) console.warn('[video] play() رُفض:', v.dataset.label, err.name); });
+}
+// إذا منع المتصفح التشغيل التلقائي، نعيد المحاولة عند أول لمس أو تمرير
+['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(ev =>
+  addEventListener(ev, () => allVideos.forEach(v => { if (v.paused && !v.error && v.getAttribute('src') && v.dataset.want === '1') tryPlay(v); }), { passive: true }));
+
+function initBgVideos() {
+  if (navigator.connection?.saveData) return;
+  $$('[data-bg-video]').forEach(sec => {
+    const url = sec.dataset.bgVideo;
+    // فيديو أمامي كامل (contain) + نسخة مغبّشة خلفه تملأ الجوانب
+    const mk = back => {
+      const v = document.createElement('video');
+      v.className = 'bg-video' + (back ? ' back' : ''); v.preload = 'auto'; v.dataset.label = url + (back ? ' (back)' : '');
+      v.setAttribute('aria-hidden', 'true');
+      if (!back && sec.dataset.bgFit) v.style.objectFit = sec.dataset.bgFit;   // data-bg-fit="cover" لو تبغى تعبئة كاملة
+      prepVideo(v, v.dataset.label);
+      v.addEventListener('playing', () => { v.classList.add('on'); sec.classList.add('has-bg'); });
+      v.addEventListener('error', () => { v.classList.remove('on'); if (!sec.querySelector('.bg-video.on')) sec.classList.remove('has-bg'); });
+      return v;
+    };
+    const pair = [mk(true), mk(false)];
+    sec.classList.add('bg-host'); pair.forEach(v => sec.prepend(v));
+    new IntersectionObserver(([en]) => {
+      pair.forEach(v => {
+        if (en.isIntersecting) {
+          v.dataset.want = '1';
+          if (!v.getAttribute('src')) { v.src = url; v.load(); }
+          tryPlay(v);
+        } else { v.dataset.want = '0'; v.pause(); }
+      });
+    }, { rootMargin: '300px' }).observe(sec);
+  });
+}
+
+/* ============ تهيئة ============ */
+function init() {
+  // بدل: صورتان في أقواس
+  $('#suitsArt').innerHTML = ['m05', 'm06'].map(id => {
+    const p = byId(id);
+    return `<figure data-sid="${id}"><img src="${imgFor(p, p.colors[0])}" data-id="${id}" data-color="${p.colors[0]}" alt="${esc(p.name)}" loading="lazy"></figure>`;
+  }).join('');
+  $('#suitsArt').addEventListener('click', e => { const f = e.target.closest('figure'); if (f) openModal(f.dataset.sid); });
+
+  ['men', 'women', 'acc'].forEach(g => { $('#cnt-' + g).textContent = PRODUCTS.filter(p => p.g === g).length + ' قطعة'; });
+  const maxD = Math.max(...PRODUCTS.map(p => p.d));
+  $('#maxDisc').textContent = maxD;
+  const targets = { stProducts: PRODUCTS.length, stBrands: BRANDS.length, stDisc: maxD };
+  const io = new IntersectionObserver(es => es.forEach(en => {
+    if (!en.isIntersecting) return; io.disconnect();
+    Object.entries(targets).forEach(([id, n]) => countUp($('#' + id), n));
+  }), { threshold: .4 });
+  io.observe($('.stats'));
+
+  const waLink = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent('مرحبًا enzo، أريد أن تصلني العروض الجديدة')}`;
+  $('#waJoin').href = waLink; $('#waShow').textContent = '+' + WHATSAPP;
+
+  renderBrands(); renderAll(false); renderCart(); renderFav(); renderDealCard();
+  tick(); setInterval(tick, 1000);
+  prepVideo(video, 'hero'); prepVideo(heroBack, 'hero-back'); setVideo('men'); visitors(); initBgVideos();
+}
+init();
+</script>
+</body>
+</html>
